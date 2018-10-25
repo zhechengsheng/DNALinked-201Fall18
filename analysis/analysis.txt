@@ -2,8 +2,10 @@ Your Name here
 Zhecheng Sheng
 Your NetID here
 zs68
-Your Partner's name here (or erase)
-Your Partner's NetID here (or erase)
+Your Partner's name here
+Wendi Xiao
+Your Partner's NetID here
+wx38
 
 Questions to answer in your analysis.txt 
 In answering these questions you should refer to the timings you generated from the DNABenchmark program on your machine. Use these timings to answer three questions.
@@ -36,9 +38,17 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 	at IDnaStrand.cutAndSplice(IDnaStrand.java:41)
 	at DNABenchmark.strandSpliceBenchmark(DNABenchmark.java:67)
 	at DNABenchmark.main(DNABenchmark.java:113)
+	
+Yes. Overall StringStrand takes much longer than StringBuilderStrend and
+it's due to the creation of lots of new Strings from scratch. 
+The time difference is not as obvious when the splicee size is small--
+when splicee is less than 5,000 bp the times are similar. 
+When splicee gets longer than 5,000 bp, the time required for cutAndSplice 
+is roughly doubled as the size of splicee doubles. 
+So the timings for StringStrand can be seen as consistent.	
+	
+	
 Question 2: are the benchmark timings for StringBuilderStrand consistent with the explanation below that the time to execute cutAndSplice is O(bS)? 
-
-
 
 Note that the value of b is half the number of calls to append since each cut (except the first) is modeled by two calls of append in the method cutAndSplice
 -- see the code. This means that b will be constant in the benchmark, but S will vary.
@@ -70,6 +80,11 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 	at IDnaStrand.cutAndSplice(IDnaStrand.java:41)
 	at DNABenchmark.strandSpliceBenchmark(DNABenchmark.java:67)
 	at DNABenchmark.main(DNABenchmark.java:113) 
+
+Yes. The run time is faster in StringBuilderStrand than in StringStrand,
+which is linearly correlated with the number of appends. 
+
+
 
 Question 3: Explain why the time for LinkStrand does not change much at all over all the runs in the benchmark program. 
 Explain why you think memory is exhausted at the specific strand size you see in your timings -- as compared to exhaustion for String and StringBuilder.
@@ -107,3 +122,11 @@ Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
 	at java.base/java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:512)
 	at java.base/java.lang.StringBuilder.append(StringBuilder.java:141)
 	at DNABenchmark.main(DNABenchmark.java:110)
+	
+Running times for LinkStrand does not change much because each run it creates
+same number of nodes at the occurrences of enzymes in the original strand.
+It doesn't involve creating new Strings and new nodes all contain same splicee info. Therefore LinkStrand doesn't exhaust the memory as fast as StringStrand or StringBuilderStrand. 
+
+
+
+	

@@ -1,13 +1,21 @@
 
+/**
+ * Efficient Version of StrngStrand
+ * @author shengzhecheng
+ *
+ */
 public class LinkStrand implements IDnaStrand {
 
 	public LinkStrand() {
 		this("");
 	}
+	/**
+	 * 
+	 * @param s String used to initialize a LinkStrand Object 
+	 */
 	public LinkStrand(String s) {
 		initialize(s);
 	}
-	
 	private class Node {
 	   	String info;
 	   	Node next;
@@ -24,12 +32,17 @@ public class LinkStrand implements IDnaStrand {
 	private Node myCurrent;
 ;
 
-	
+	/**
+	 * @return size of the internal linked list
+	 */
 	@Override
 	public long size() {
 		// TODO Auto-generated method stub
 		return mySize;
 	}
+	/**
+	 * String representation of the object
+	 */
 	@Override
 	public String toString() {
 		myLast = myFirst;
@@ -41,7 +54,9 @@ public class LinkStrand implements IDnaStrand {
 		return x.toString();
 		
 	}
-
+    /**
+     * Initialize all instance variables
+     */
 	@Override
 	public void initialize(String source) {
 		// TODO Auto-generated method stub
@@ -55,13 +70,19 @@ public class LinkStrand implements IDnaStrand {
 		myIndex = 0;
 
 	}
-
+	
+	
+    /**
+     * Get instance of the object
+     */
 	@Override
 	public IDnaStrand getInstance(String source) {
 		// TODO Auto-generated method stub
 		return new LinkStrand(source);
 	}
-
+	/**
+	 * Append new nodes to the link list
+	 */
 	@Override
 	public IDnaStrand append(String dna) {
 		// TODO Auto-generated method stub
@@ -73,7 +94,10 @@ public class LinkStrand implements IDnaStrand {
 	}
 
 	
-	
+	/**
+	 * Reverse the linkStrand
+	 * @return A reversed version of the linkStrand
+	 */
 	@Override
 	public IDnaStrand reverse() {
 		// TODO Auto-generated method stub
@@ -101,13 +125,17 @@ public class LinkStrand implements IDnaStrand {
 		
 		return revs;
 	}
-
+	/**
+	 * Get myAppends
+	 */
 	@Override
 	public int getAppendCount() {
 		// TODO Auto-generated method stub
 		return myAppends;
 	}
-
+	/**
+	 * Return the character at certain index
+	 */
 	@Override
 	public char charAt(int index) {
 
@@ -129,9 +157,7 @@ public class LinkStrand implements IDnaStrand {
 				myCurrent = myCurrent.next;
 				myLocalIndex = 0;
 			}
-		}
-		
-		
+		}		
 //		while(myCurrent.info.length() -1 < index - myIndex + myLocalIndex) {
 //			myIndex += (myCurrent.info.length()-1);
 //			myCurrent = myCurrent.next;
