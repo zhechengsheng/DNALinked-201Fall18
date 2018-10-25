@@ -19,9 +19,9 @@ public class LinkStrand implements IDnaStrand {
 	private Node myFirst,myLast;
 	private long mySize;
 	private int myAppends;
-	public int myIndex;
-	public int myLocalIndex;
-	public Node myCurrent;
+	private int myIndex;
+	private int myLocalIndex;
+	private Node myCurrent;
 ;
 
 	
@@ -77,8 +77,10 @@ public class LinkStrand implements IDnaStrand {
 	@Override
 	public IDnaStrand reverse() {
 		// TODO Auto-generated method stub
-		Node mid  = myFirst;
+		
 		Node list = myFirst;
+		Node mid = new Node(myFirst.info);
+		
 		while(list.next != null) {
 			list = list.next;
 			Node rev =new Node(list.info);
